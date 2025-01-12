@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LibraryLogo from '../assets/Library.svg';
+import { Link } from "react-router-dom"
 
 // we need to import library logo like, this, we do not add them like we did in html directly in the code giving directory 
 
@@ -16,23 +17,23 @@ function closeMenu() {
     return (
         <nav>
             <div className="nav__container">
-                <a href="/">
+                <Link to="/">
                 <img src={LibraryLogo} alt="" className="logo" />
-                </a>
+                </Link>
                 <ul className='nav__links'>
                     <li className='nav__list'>
-                        <a href="/" className='nav__link'>Home</a>
+                        <Link to="/" className='nav__link'>Home</Link>
                     </li>
                     <li className='nav__list'>
-                        <a href="/" className='nav__link'>Books</a>
+                        <Link to="/books" className='nav__link'>Books</Link>
                     </li>
                     <button className='btn__menu' onClick={openMenu}>
                         <FontAwesomeIcon icon="bars" />
                     </button>
                     <li className='nav__icon'>
-                        <a href="/cart" className='nav__link'>
+                        <Link to="/cart" className='nav__link'>
                             <FontAwesomeIcon icon="shopping-cart" />
-                        </a>
+                        </Link>
                         <span className="cart__length">3</span>
                     </li>
                 </ul>
@@ -42,18 +43,16 @@ function closeMenu() {
                     </button>
                     <ul className="menu__links">
                         <li className="menu__list">
-                            <a href="/" className='menu__link'>Home</a>
+                            <Link to="/" className='menu__link'>Home</Link>
                         </li>
                         <li className="menu__list">
-                            <a href="/books" className='menu__link'>Books</a>
+                            <Link to="/books" className='menu__link'>Books</Link>
                          </li>
                         <li className="menu__list">
-                            <a href="/cart" className='menu__link'>Cart</a>
+                            <Link to="/cart" className='menu__link'>Cart</Link>
                         </li>
                     </ul>
                 </div>
-
-
             </div>
         </nav>
     )
@@ -65,3 +64,5 @@ export default Nav;
 // function openMenu() { document.body.classList += " menu--open";  - we add this so the hamburger on smaller screens opens the menu 
 // and then we add onClick to the btn__menu : onClick={openMenu}  no parentsasis after openMenu as then it calls it straight away 
 // but if you need to pass some props then arrow function: onClick={() => closeMenu(props)}
+// to create smooth rerouting, we need to change every a href to link: Link to 
+// and we need to import link form React dom. We need to change all a hrefs on the whole page 

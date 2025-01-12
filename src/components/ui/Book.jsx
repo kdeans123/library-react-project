@@ -1,39 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import Rating from "./Rating";
+import Price from "./Price";
 
 const Book = ({ book }) => {
   return (
     <div className="book">
-      <a href="" className="">
+      <Link to={`/books/${book.id}`} className="">
         <figure className="book__img--wrapper">
           <img src={book.url} alt="" className="book__img" />
         </figure>
-      </a>
+      </Link>
       <div className="book__title">
-        <a href="/" className="book__title--link">
+        <Link to={`/books/${book.id}`} className="book__title--link">
           {book.title}
-        </a>
+        </Link>
       </div>
-      <div className="book__ratings">
-        {
-          new Array(Math.floor(book.rating)).fill(0).map((_, index) => <FontAwesomeIcon icon="star" key={index} />)
-        }
-        {
-          !Number.isInteger(book.rating) && <FontAwesomeIcon icon="star-half-alt" />
-        }
-      </div>
-      <div className="book__price">
-        {book.salePrice ? (
-          <>
-            <span className="book__price--normal">
-              ${book.originalPrice.toFixed(2)}
-            </span>
-            ${book.salePrice.toFixed(2)}
-          </>
-        ) : (
-          <>${book.originalPrice.toFixed(2)} </>
-        )}
-      </div>
+      <Rating rating={book.rating}/>   
+      <Price salePrice={book.salePrice} originalPrice={book.originalPrice}/>
     </div>
   );
 };
@@ -47,3 +31,5 @@ export default Book;
 // when printing ratings we use math.floor so that it rounds the number to 4 if it is 4.5
 // for half stars we do if it is integer (meaning a whole number, full number), then print nothing, and if it is not , print half star 
 // you can make this line cleaner by using double && sign so instead of: Number.isInteger(book.rating) ? '' : <FontAwesomeIcon icon="star-half-alt" />  and we read it, if the first one is true then it prints second one, if the first one is false then it prints nothing 
+// we add Link to books/1 routing - it is hard coded for now, 
+//   <Link to={`/books/${book.id}`} className="book__title--link">  we are pushing book.id to the route so it automatically detects the id of the book 

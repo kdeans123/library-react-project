@@ -1,20 +1,34 @@
 import './index.css';
+import React, { useEffect, useState } from 'react';
 import Nav from "./components/Nav";
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Books from './pages/Books';
 import { books } from "./data";
+import BookInfo from './pages/BookInfo';
+import Cart from './pages/Cart';
 
 
 function App() {
+  const [cart, setCart] = useState([]);  
+  
+  function addtoCart(book) {
+    setCart([book])
+  }
+
+  useEffect(() => {
+
+  })
+
   return (
     <Router>
       <div className="App">
         <Nav />
         <Route path="/" exact component={Home} />
-        <Route path="/books" render={() => <Books books={books}/>}/>
-        <Route path="/books/1" render={() => <BookInfo books={books} /> }/>
+        <Route path="/books" exact render={() => <Books books={books}/>}/>
+        <Route path="/books/1" render={() => <BookInfo books={books} addToCart={addToCart}/> }/>
+        <Route path="/cart" render={() => <Cart books={books} cart={cart} /> }/>
         <Footer />
       </div>
     </Router>
@@ -34,3 +48,22 @@ export default App;
 // then we import books into our router, so lets create a new route
 // we create a new route and we create a component, we will use render, becasue we want this component to know about the books, lets m=pass in component 
 // and call it bookInfo and lets pass books to it
+// Route path= cart:  it does need to know about the books so make sure you render it instead of component, because whenever you are pasisng props you need to use render 
+// and there is an arrow function for it to work 
+
+// by default it is an array 
+// when do we want to add iten to the cart, when we click the button "Add to cart" and this button is in BookInfo, but we actually want the functionality to happen in this class 
+// so we add the fucntion addToCoart, so how do we get the button to call this function 
+// we add a property addToCart={addToCart}/> }/> line 26 and we pass in this function that we have here addToCart 
+// now we go to BookInfo and accept it: const BookInfo = (books, addToCart) =>    - now this function is callable
+
+// if you want o log it straigh away you want to use useEffect 
+// in order for the "Add to cart " buttin adding additional books rather than removing and replacing the same book, we can use spread operator:   setCart([...cart, book])
+// when we add more of the same book we do not want to see a row for each book, we want to see increased quantity
+// 
+// we iuse es6, we use spread operator, we take all the property from the book and instead we are adding quantity to it:
+//   const dupeItem = cart.find(item => +item.id === +book.id)       if (dupeItem)         dupeItem.quantity += 1;
+// and now we need to replace he first one 
+
+// we are going to return the item with spread operatr, which allows us to add a new quantity:    return {  ...item,  quantity: item.quantity +1,
+// setCart([...cart, {...book, quantity: 1}])  - the first operator is just creating a new array, the 2nd spread operator is including the title, id, image,... and then adding a quantity 

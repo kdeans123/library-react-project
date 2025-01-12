@@ -7,11 +7,11 @@ const Landing = () => {
         <header>
             <div className="header__container">
                 <div className="header__description">
-                    <h1>America's most awarded online library platform</h1>
-                    <h2>Find your dream ook with <span className='purple'>Library</span></h2>
-                    <a href="#features">
+                    <h1>America's most awarded online library platform of all times</h1>
+                    <h2>Find your dream book with <span className='purple'>Library</span></h2>
+                    <Link to="#features">
                         <button className='btn'>Browse books</button>
-                    </a>
+                    </Link>
                 </div>
                 <figure className='header__img--wrapper'>
                     <img src={UndrawBooks} alt="" className='landing__img'/>

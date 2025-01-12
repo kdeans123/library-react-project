@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EmptyCart from "../assets/empty_cart.svg";
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Cart = ({ cart, changeQuantity, removeItem }) => {
     const total = () =>
@@ -59,19 +60,22 @@ const Cart = ({ cart, changeQuantity, removeItem }) => {
                                                 <div className="cart__total">${((book.salePrice || book.originalPrice) * book.quantity).toFixed(2)}                                        
                                                 </div>
                                             </div>
-                                        )
-                                    }
-                                    )
-                                }
-                                
+                                        );
+                                    })}                                
                             </div>
                         </div>
-
-                        <div className="cart__empty">
-                            <img src={EmptyCart} alt="" className="cart__empty--img" />
-                        </div>
+                        {cart.lenght === 0 && (
+                            <div className="cart__empty">
+                                <img src={EmptyCart} alt="" className="cart__empty--img" />
+                                <h2 className="">You don't have any books in your cart!</h2>
+                                <Link to="/books">
+                                    <button className='btn'>Browse books</button>
+                                </Link>                                
+                            </div>
+                        )}
                     </div>
-                    <div className="total">
+                    {cart.lenght > 0 && (
+                        <div className="total">
                         <div className="total__item total__sub-total">
                             <span>Subtotal</span>
                             <span>${(total() * 0.9).toFixed}</span>
@@ -88,6 +92,7 @@ const Cart = ({ cart, changeQuantity, removeItem }) => {
                         onClick={() => alert(`Haven't got a chance to doing this :)`)}>
                             Proceed to checkout</butoon>
                     </div>
+                    )}
                 </div>
             </div>
         </main>

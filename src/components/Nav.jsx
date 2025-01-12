@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 // we need to import library logo like, this, we do not add them like we did in html directly in the code giving directory 
 
-const Nav = () => {
+const Nav = ({ numberOfItems }) => {
 function openMenu() {
     document.body.classList += " menu--open";
 }
@@ -34,7 +34,9 @@ function closeMenu() {
                         <Link to="/cart" className='nav__link'>
                             <FontAwesomeIcon icon="shopping-cart" />
                         </Link>
-                        <span className="cart__length">3</span>
+                        {
+                            numberOfItems > 0 && <span className="cart__length">{numberOfItems}</span>
+                        }                        
                     </li>
                 </ul>
                 <div className="menu__backdrop">

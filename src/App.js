@@ -32,6 +32,14 @@ function App() {
     setCart(cart.filter(book => book.id !== item.id));
   } 
 
+  function numberOfItems() {
+    let counter = 0; 
+    cart.forEach(item => {
+      counter += item.quantity
+    })
+    return counter;
+  }
+
   useEffect(() => {
       console.log(cart);
   }, [cart]);
@@ -39,7 +47,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Nav />
+        <Nav numberOfItems={numberOfItems()}/>
         <Route path="/" exact component={Home} />
         <Route path="/books" exact render={() => <Books books={books}/>}/>
         <Route 
@@ -108,4 +116,4 @@ export default App;
 // and simpler way to write it using ternany operator:   return item.id === book.id     ? {    ...item,   quantity: +quantity,}  : item;
 
 
-// filter by the book id, keep it in the arry if the ids do not match, and if they do match remove it from the array. when it is not equal to it, returns when it does not match 
+// filter by the book id, keep it in the array if the ids do not match, and if they do match remove it from the array. when it is not equal to it, returns when it does not match 

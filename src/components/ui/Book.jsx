@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Rating from "./Rating";
 import Price from "./Price";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
@@ -7,11 +7,17 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 const Book = ({ book }) => {
   const [img, setImg] = useState();
 
+  const mountedRef = useRef(true);
+
   useEffect(() => {
     const image = new Image()
     image.src = book.url;
     image.onload = () => {
-      setImg(image);
+      setTimeout(() => {
+        if (mountedRef.current) {
+          setImg(image);
+        }       
+      }, 300);
     }
   })
 
@@ -69,3 +75,6 @@ export default Book;
 // as soon as this book component mounts it is going to call useEffect, it is going to create a DOM image element with java script, and it is going to attach onload function to it: when it loads set this image 
 // now we set image.src element, and src is coming form book, so we are programatially create the image now, we not doing igt in html anymore, we are doing it in java script 
 // this is powerful as now we can use image onload. and then we set th eimage to the image. 
+
+// useRef - it is very similar to useState, when useRef changes, whole component doe snot rerender, when useState changes - whole component rerenders
+// we use .current for Ref:  mounterRef.current 

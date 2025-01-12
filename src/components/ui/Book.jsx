@@ -5,11 +5,17 @@ import Price from "./Price";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const Book = ({ book }) => {
+  function imageLoaded() {
+
+  }
   return (
     <div className="book">
-      <Link to={`/books/${book.id}`} className="">
+      <div className="book__img--skeleton"></div>
+      <div className="skeleton book__rating--skeleton"></div>
+
+      {/* <Link to={`/books/${book.id}`} className="">
         <figure className="book__img--wrapper">
-          <img src={book.url} alt="" className="book__img" />
+          <img src={book.url} alt="" className="book__img" onLoad={imageLoaded} />
         </figure>
       </Link>
       <div className="book__title">
@@ -18,7 +24,7 @@ const Book = ({ book }) => {
         </Link>
       </div>
       <Rating rating={book.rating}/>   
-      <Price salePrice={book.salePrice} originalPrice={book.originalPrice}/>
+      <Price salePrice={book.salePrice} originalPrice={book.originalPrice}/> */}
     </div>
   );
 };
@@ -34,3 +40,4 @@ export default Book;
 // you can make this line cleaner by using double && sign so instead of: Number.isInteger(book.rating) ? '' : <FontAwesomeIcon icon="star-half-alt" />  and we read it, if the first one is true then it prints second one, if the first one is false then it prints nothing 
 // we add Link to books/1 routing - it is hard coded for now, 
 //   <Link to={`/books/${book.id}`} className="book__title--link">  we are pushing book.id to the route so it automatically detects the id of the book 
+// to build a skeleton of images loading, we use: onLoad={imageLoaded} 

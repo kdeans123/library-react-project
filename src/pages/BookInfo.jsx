@@ -3,8 +3,9 @@ import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Rating from '../components/ui/Rating';
 import Book from '../components/ui/Book';
+import Price from '../components/ui/Price';
 
-const BookInfo = (books, addToCart) => {
+const BookInfo = ({ books, addToCart, cart }) => {
   const { id } = useParams()
   const book = books.find(book => +book.id === +id);
   const [added, setAdded] = useState(false);
@@ -57,7 +58,7 @@ const BookInfo = (books, addToCart) => {
                                 <button className="btn">Checkout</button>
                                 </Link>
                             ) : (
-                            <botton className="btn" onClick={() => addBooktoCart(book)}>Add to cart</botton>)
+                            <botton className="btn" onClick={() => addBookToCart(book)}>Add to cart</botton>)
                             }
                         </div>
                     </div>

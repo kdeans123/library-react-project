@@ -13,7 +13,7 @@ import Cart from './pages/Cart';
 function App() {
   const [cart, setCart] = useState([]);  
   
-  function addtoCart(book) {
+  function addToCart(book) {
     setCart([...cart, {...book, quantity: 1}]);
   }
 
@@ -51,11 +51,12 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/books" exact render={() => <Books books={books}/>}/>
         <Route 
-          path="/books/1" 
+          path="/books/:id" 
           render={() => (
             <BookInfo 
               books={books} 
-                addToCart={addToCart}/> )}
+                addToCart={addToCart}
+                cart={cart} /> )}
                 />
         <Route 
           path="/cart" 

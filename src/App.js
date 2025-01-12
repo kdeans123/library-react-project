@@ -14,12 +14,16 @@ function App() {
   const [cart, setCart] = useState([]);  
   
   function addtoCart(book) {
-    setCart([book])
+    setCart([...cart, {...book, quantity: 1}]);
   }
 
-  useEffect(() => {
+  function changeQuantity(book) {
+      console.log(book.quantity);
+    }
 
-  })
+  useEffect(() => {
+      console.log(cart);
+  }, [cart]);
 
   return (
     <Router>
@@ -28,7 +32,7 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/books" exact render={() => <Books books={books}/>}/>
         <Route path="/books/1" render={() => <BookInfo books={books} addToCart={addToCart}/> }/>
-        <Route path="/cart" render={() => <Cart books={books} cart={cart} /> }/>
+        <Route path="/cart" render={() => <Cart books={books} cart={cart} changeQuantity={changeQuantity} /> }/>
         <Footer />
       </div>
     </Router>
@@ -67,3 +71,7 @@ export default App;
 
 // we are going to return the item with spread operatr, which allows us to add a new quantity:    return {  ...item,  quantity: item.quantity +1,
 // setCart([...cart, {...book, quantity: 1}])  - the first operator is just creating a new array, the 2nd spread operator is including the title, id, image,... and then adding a quantity 
+
+// how do we update quantity, we need to use spread operator and we add quantity to it 
+
+//  we created a prop that whenever we call changeQuantity in this cart we gonna console log up there 

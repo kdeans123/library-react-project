@@ -17,8 +17,15 @@ function App() {
     setCart([...cart, {...book, quantity: 1}]);
   }
 
-  function changeQuantity(book) {
-      console.log(book.quantity);
+  function changeQuantity(book, quantity) {
+      setCart(cart.map(item => {
+        return item.id === book.id
+            ? {
+              ...item,
+              quantity: +quantity,
+            }
+            : item;
+        }));
     }
 
   useEffect(() => {
@@ -75,3 +82,9 @@ export default App;
 // how do we update quantity, we need to use spread operator and we add quantity to it 
 
 //  we created a prop that whenever we call changeQuantity in this cart we gonna console log up there 
+
+// if this is the book we are working with, update the quantity of that book:   setCart(cart.map(item => {        if (item.id === book.id) {
+// and we take the quantity form the event: event.target.value 
+// and simpler way to write it using ternany operator:   return item.id === book.id     ? {    ...item,   quantity: +quantity,}  : item;
+
+

@@ -28,6 +28,10 @@ function App() {
         }));
     }
 
+  function removeItem(item) {
+    setCart(cart.filter(book => book.id !== item.id));
+  } 
+
   useEffect(() => {
       console.log(cart);
   }, [cart]);
@@ -38,8 +42,24 @@ function App() {
         <Nav />
         <Route path="/" exact component={Home} />
         <Route path="/books" exact render={() => <Books books={books}/>}/>
-        <Route path="/books/1" render={() => <BookInfo books={books} addToCart={addToCart}/> }/>
-        <Route path="/cart" render={() => <Cart books={books} cart={cart} changeQuantity={changeQuantity} /> }/>
+        <Route 
+          path="/books/1" 
+          render={() => (
+            <BookInfo 
+              books={books} 
+                addToCart={addToCart}/> )}
+                />
+        <Route 
+          path="/cart" 
+          render={() => (
+            <Cart 
+              books={books} 
+              cart={cart} 
+              changeQuantity={changeQuantity}
+              removeItem={removeItem} 
+              />  
+          )}
+          />
         <Footer />
       </div>
     </Router>
@@ -88,3 +108,4 @@ export default App;
 // and simpler way to write it using ternany operator:   return item.id === book.id     ? {    ...item,   quantity: +quantity,}  : item;
 
 
+// filter by the book id, keep it in the arry if the ids do not match, and if they do match remove it from the array. when it is not equal to it, returns when it does not match 

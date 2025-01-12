@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Price = (salePrice, originalPrice) => {
+export const Price = ({salePrice, originalPrice}) => {
   return (
     <div className="book__price">
         {salePrice ? (

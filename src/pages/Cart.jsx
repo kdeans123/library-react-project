@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react'
 const Cart = ({ cart, changeQuantity }) => {
     const total = () =>
         let price = 0;
-        cart.forEach(item => {
-            price += +(item.salePrice || item.originalPrice) * item.quantity;
-        });
+        cart.forEach((item) => {
+            price += +(
+                (item.salePrice || item.originalPrice) * item.quantity
+            )};
         return price;
     };
   

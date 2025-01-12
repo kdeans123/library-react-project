@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import EmptyCart from "../assets/empty_cart.svg";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
-const Cart = ({ cart, changeQuantity, removeItem }) => {
-    const total = () =>{
-        let price = 0;
-        cart.forEach((item) => {
-            price += +(
-                (item.salePrice || item.originalPrice) * item.quantity
-            )};
-        return price;
-    }};
+const total = () =>{
+    let price = 0;
+    cart.forEach((item) => {
+        price += +(
+            (item.salePrice || item.originalPrice) * item.quantity
+        );
+    });
+    return price;
+};
   
   return (
     <div id="books__body">
